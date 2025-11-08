@@ -48,6 +48,10 @@ const ProductSearch = () => {
           </p>
         )}
       </div>
+      <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-500">
+        © {new Date().getFullYear()} KWIK SHOPPER. All Rights Reserved.{" "}
+        <span>by GreyLine Studios</span>
+      </div>
     </div>
   );
 };

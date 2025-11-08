@@ -110,7 +110,7 @@ const Footer = () => {
 
       {/* Divider */}
       <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-500">
-        © {new Date().getFullYear()} KWIK SHOPPER. All Rights Reserved.
+        © {new Date().getFullYear()} KWIK SHOPPER. All Rights Reserved. <span>by GreyLine Studios</span>
       </div>
     </footer>
   );

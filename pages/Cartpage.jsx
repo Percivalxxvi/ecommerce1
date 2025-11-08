@@ -42,7 +42,7 @@ const CartPage = () => {
         <div className="flex flex-col lg:flex-row lg:items-start lg:gap-8">
           {/* 🛍 Scrollable Cart Items */}
           <div
-            className="flex-1 lg:w-2/3 flex flex-col gap-4 max-h-[70vh] overflow-y-auto pr-2"
+            className="flex-1 lg:w-2/3 flex flex-col gap-1 max-h-[70vh] overflow-y-auto pr-2"
             style={{
               scrollbarWidth: "thin",
               scrollbarColor: "#9ca3af #f3f4f6",
@@ -51,7 +51,7 @@ const CartPage = () => {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white shadow-md p-4 rounded-xl transition hover:shadow-lg"
+                className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-white shadow-md py-2 px-6 rounded-xl transition hover:shadow-lg"
               >
                 {/* Product Info */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 w-full sm:w-auto">
@@ -142,6 +142,10 @@ const CartPage = () => {
           </div>
         </div>
       )}
+      <div className="border-t border-gray-700 py text-center text-sm mt-10 text-gray-500">
+        © {new Date().getFullYear()} KWIK SHOPPER. All Rights Reserved.{" "}
+        <span>by GreyLine Studios</span>
+      </div>
     </div>
   );
 };

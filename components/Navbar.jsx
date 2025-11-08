@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Navbar = ({page}) => {
   return (
-    <div className="lg:flex bg-[#5677fc] gap-3 h-20 items-center pl-25 hidden">
+    <div className="lg:flex bg-[#5677fc] gap-3 h-6 items-center pl-25 hidden">
       <Link
         to="/"
         style={{ color: page === "home" ? "black" : "" }}
