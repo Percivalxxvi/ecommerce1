@@ -18,21 +18,21 @@ const Heroslider = () => {
     <div className="h-fit w-full">
       <div className="slider-container">
         <Slider {...settings}>
-          <div className="lg:h-130 h-63 w-full bg-yellow-500">
+          <div className="lg:h-130 h-63 w-full">
             <img
               className="h-4/4"
               src="https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h5-slide-background-img-3.jpg"
               alt=""
             />
           </div>
-          <div className="lg:h-130 h-63 w-full bg-red-500">
+          <div className="lg:h-130 h-63 w-full">
             <img
               className="h-4/4"
               src="https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h5-slide-background-img-2.jpg"
               alt=""
             />
           </div>
-          <div className="lg:h-130 h-63 w-full bg-green-400">
+          <div className="lg:h-130 h-63 w-full">
             <img
               className="h-4/4"
               src="https://cyberstore.qodeinteractive.com/wp-content/uploads/2017/08/h5-slide-background-img-1.jpg"
