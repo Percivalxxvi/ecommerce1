@@ -8,6 +8,7 @@ import CartPage from '../pages/Cartpage';
 import Navpc from '../components/Navpc';
 import ProductSearch from "../pages/ProductSearch";
 import BackToTopButton from '../components/BackToTopButton';
+import Favorites from '../components/Favorites';
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -30,13 +31,15 @@ const App = () => {
           Add Item (₦4999.99)
         </button>
       </div> */}
-      <BackToTopButton/>
+      <BackToTopButton />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/:category" element={<Shop />} />
         <Route path="/description" element={<Description />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/search" element={<ProductSearch />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </Router>
   );

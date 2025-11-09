@@ -142,10 +142,10 @@ const CartPage = () => {
           </div>
         </div>
       )}
-      <div className="border-t border-gray-700 py text-center text-sm mt-10 text-gray-500">
+      {/* <div className="border-t border-gray-700 py text-center text-sm mt-10 text-gray-500">
         © {new Date().getFullYear()} KWIK SHOPPER. All Rights Reserved.{" "}
         <span>by GreyLine Studios</span>
-      </div>
+      </div> */}
     </div>
   );
 };

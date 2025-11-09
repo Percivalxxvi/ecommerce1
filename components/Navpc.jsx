@@ -1,6 +1,7 @@
 // src/components/Navpc.jsx
 import React, { useState } from "react";
 import { ShoppingCart, Menu, X, Heart, Settings2 } from "lucide-react";
+// import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import AllCategories from "./AllCategories";
 import SearchBar from "./SearchBar";
@@ -48,7 +49,11 @@ const Navpc = () => {
         {/* Cart + Menu Buttons */}
         <div className="flex items-center space-x-6">
           <Settings2 className="lg:flex hidden" />
-          <Heart className="lg:flex hidden" />
+          <Link to="/favorites" className="flex items-center gap-2">
+            <Heart className="w-5 h-5 text-red-500" />
+            Favorites
+          </Link>
+          {/* <Heart className="lg:flex hidden" /> */}
 
           {/* 🛒 Cart Icon */}
           <Link to="/cart" className="relative">
@@ -97,6 +102,13 @@ const Navpc = () => {
               Search
             </Link>
           </li>
+          <li>
+            <Link to="/favorites" className="flex items-center gap-2">
+            <Heart className="w-5 h-5 text-red-500" />
+            Favorites
+          </Link>
+          </li>
+          
           {/* 💰 Cart total visible on mobile */}
           <li className="text-gray-800 font-semibold">
             Cart Total: ${cartTotal}

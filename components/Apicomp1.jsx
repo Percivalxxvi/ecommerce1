@@ -1,7 +1,10 @@
 import React from 'react'
 import { ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
 import useCartStore from "../store";
+import { useFavoritesStore } from "../store";
+
 
 const Apicomp1 = ({ data, page, onAddToCart }) => {
   const navigate = useNavigate();
@@ -20,14 +23,39 @@ const Apicomp1 = ({ data, page, onAddToCart }) => {
         addToCart(data); // ✅ Add if not in cart
       }
     };
+
+    const { favorites, addToFavorites, removeFromFavorites } =
+      useFavoritesStore();
+
+    const isFavorite = favorites.some((fav) => fav.id === data.id);
+
+    const toggleFavorite = () => {
+      if (isFavorite) {
+        removeFromFavorites(data.id);
+      } else {
+        addToFavorites(data);
+      }
+    };
   return (
     <div
       style={{ width: page === "shop" ? "" : "" }}
       className="lg:w-70 w-85 h-95 bg-[#ffffff] flex flex-col items-center text-left"
     >
-      <h1 className="ml-2 mr-2 pb-2 pt-2 text-left w-[90%]">
-        {data.category.slice(0, 25)}
-      </h1>
+      <div className="w-4/4 flex">
+        <h1 className="ml-2 mr-2 pb-2 pt-2 text-left w-[90%]">
+          {data.category.slice(0, 25)}
+        </h1>
+        <button
+          onClick={toggleFavorite}
+          className={`p-2 rounded-full transition-all cursor-pointer ${
+            isFavorite ? "bg-red-500 text-white" : "bg-gray-200 text-gray-600"
+          }`}
+          aria-label="Add to Favorites"
+        >
+          <Heart className={isFavorite ? "fill-white" : "fill-none"} />
+        </button>
+      </div>
+
       <img
         className="h-40 w-50 object-contain border-0"
         src={data.image}

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AllCategories = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,9 +10,9 @@ const AllCategories = () => {
     { name: "Men’s Fashion", path: "/shop/mens" },
     { name: "Women’s Fashion", path: "/shop/womens" },
     { name: "Electronics", path: "/shop/electronics" },
-    { name: "Home & Kitchen", path: "/shop/home" },
-    { name: "Beauty & Health", path: "/shop/beauty" },
-    { name: "Sports", path: "/shop/sports" },
+    // { name: "Home & Kitchen", path: "/shop/home" },
+    { name: "Jewelery", path: "/shop/jewelery" },
+    // { name: "Sports", path: "/shop/sports" },
   ];
 
   // Close dropdown when clicking outside
@@ -30,7 +31,7 @@ const AllCategories = () => {
       {/* Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-center gap-1 bg-gray-200 hover:bg-gray-200 text-gray-800 font-medium px-4 py-2 lg:w-40 w-fit rounded-md transition"
+        className="flex items-center justify-center gap-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-4 py-2 lg:w-40 w-fit rounded-md transition"
       >
         All Categories
         <ChevronDown
@@ -42,16 +43,17 @@ const AllCategories = () => {
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+        <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           <ul className="py-2">
             {categories.map((cat, index) => (
               <li key={index}>
-                <a
-                  href={cat.path}
+                <Link
+                  to={cat.path}
                   className="block px-4 py-2 hover:bg-gray-100 text-gray-700 transition"
+                  onClick={() => setIsOpen(false)} // close dropdown on click
                 >
                   {cat.name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

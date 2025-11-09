@@ -89,3 +89,23 @@ const useCartStore = create(
 );
 
 export default useCartStore;
+
+export const useFavoritesStore = create((set) => ({
+  favorites: [],
+
+  addToFavorites: (item) =>
+    set((state) => {
+      if (!item || !item.id) return state; // Prevent invalid adds
+      const exists = state.favorites.some((fav) => fav.id === item.id);
+      if (exists) return state; // Prevent duplicates
+      return { favorites: [...state.favorites, item] };
+    }),
+
+  removeFromFavorites: (id) =>
+    set((state) => ({
+      favorites: state.favorites.filter((fav) => fav.id !== id),
+    })),
+
+  clearFavorites: () => set({ favorites: [] }),
+}));
+
