@@ -1,7 +1,9 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useCartStore from "../store";
+import { useFavoritesStore } from "../store";
 
 const Apicomp2 = ({ data, page, onAddToCart }) => {
   const navigate = useNavigate();
@@ -19,6 +21,18 @@ const Apicomp2 = ({ data, page, onAddToCart }) => {
       addToCart(data); // ✅ Add if not in cart
     }
   };
+    const { favorites, addToFavorites, removeFromFavorites } =
+        useFavoritesStore();
+  
+      const isFavorite = favorites.some((fav) => fav.id === data.id);
+  
+      const toggleFavorite = () => {
+        if (isFavorite) {
+          removeFromFavorites(data.id);
+        } else {
+          addToFavorites(data);
+        }
+      };
   return (
     <div
       style={{ width: page === "shop" ? "260px" : "" }}
@@ -63,6 +77,15 @@ const Apicomp2 = ({ data, page, onAddToCart }) => {
           aria-label="Add to cart"
         >
           <ShoppingCart className="w-6 h-6" />
+        </button>
+        <button
+          onClick={toggleFavorite}
+          className={`p-2 rounded-full transition-all cursor-pointer ${
+            isFavorite ? "bg-red-500 text-white" : "bg-gray-200 text-gray-600"
+          }`}
+          aria-label="Add to Favorites"
+        >
+          <Heart className={isFavorite ? "fill-white" : "fill-none"} />
         </button>
       </div>
     </div>

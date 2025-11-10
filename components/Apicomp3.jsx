@@ -1,7 +1,9 @@
 import React from "react";
 import { ShoppingCart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useCartStore from "../store";
+import { useFavoritesStore } from "../store";
 
 const Apicomp3 = ({ data, page, onAddToCart }) => {
   const navigate = useNavigate();
@@ -19,6 +21,18 @@ const Apicomp3 = ({ data, page, onAddToCart }) => {
       addToCart(data); // ✅ Add if not in cart
     }
   };
+   const { favorites, addToFavorites, removeFromFavorites } =
+          useFavoritesStore();
+    
+        const isFavorite = favorites.some((fav) => fav.id === data.id);
+    
+        const toggleFavorite = () => {
+          if (isFavorite) {
+            removeFromFavorites(data.id);
+          } else {
+            addToFavorites(data);
+          }
+        };
   return (
     <div
       style={{ width: page === "shop" ? "260px" : "" }}
@@ -26,7 +40,7 @@ const Apicomp3 = ({ data, page, onAddToCart }) => {
     >
       <div className="flex">
         <img
-          className="h-35 w-35 object-contain border border-gray-300 rounded-xl"
+          className="h-30 w-35 object-contain border border-gray-300 rounded-xl"
           src={data.image}
           alt=""
         />
@@ -44,7 +58,7 @@ const Apicomp3 = ({ data, page, onAddToCart }) => {
         </div>
       </div>
 
-      <div className="w-4/4 flex items-center justify-end mt-1">
+      <div className="w-4/4 flex items-center justify-end mt-1 mb-5">
         <button
           onClick={() => {
             navigate("/description", { state: data });
@@ -64,6 +78,15 @@ const Apicomp3 = ({ data, page, onAddToCart }) => {
         >
           <ShoppingCart className="w-6 h-6" />
         </button>
+         <button
+                  onClick={toggleFavorite}
+                  className={`p-2 rounded-full transition-all cursor-pointer ${
+                    isFavorite ? "bg-red-500 text-white" : "bg-gray-200 text-gray-600"
+                  }`}
+                  aria-label="Add to Favorites"
+                >
+                  <Heart className={isFavorite ? "fill-white" : "fill-none"} />
+                </button>
       </div>
     </div>
   );
