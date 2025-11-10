@@ -60,11 +60,11 @@ const Home = () => {
             <h1 className="text-4xl text-center w-[90%] text-white">
               Shop to Get What You Love
             </h1>
-            <a href="/shop">
+            <Link to="/shop">
               <button className=" h-10 w-50 bg-blue-500 rounded-3xl text-white font-semibold mb-5 hover:cursor-pointer">
                 Shop Now
               </button>
-            </a>
+            </Link>
 
             {/* <img
               className="bottom-0 relative h-30"
