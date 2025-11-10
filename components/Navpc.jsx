@@ -6,9 +6,16 @@ import { Link } from "react-router-dom";
 import AllCategories from "./AllCategories";
 import SearchBar from "./SearchBar";
 import useCartStore from "../store"; // ✅ Import your Zustand cart store
+import { useFavoritesStore } from "../store";
 
 const Navpc = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { favorites } = useFavoritesStore();
+
+  // ✅ Check if there are items in favorites
+  const hasFavorites = favorites.length > 0;
+
 
   // ✅ Pull the cart state directly from Zustand
   const { cart } = useCartStore();
@@ -49,9 +56,18 @@ const Navpc = () => {
         {/* Cart + Menu Buttons */}
         <div className="flex items-center space-x-6">
           <Settings2 className="lg:flex hidden" />
-          <Link to="/favorites" className="flex items-center gap-2">
-            <Heart className="w-5 h-5 text-red-500" />
-            Favorites
+          <Link
+            to="/favorites"
+            className="flex items-center gap-2 hover:text-red-600 transition-all"
+          >
+            <Heart
+              className={`w-5 h-5 transition-all ${
+                hasFavorites
+                  ? "text-red-500 fill-red-500"
+                  : "text-gray-500 fill-none"
+              }`}
+            />
+            <span className="text-sm sm:text-base font-medium">Favorites</span>
           </Link>
           {/* <Heart className="lg:flex hidden" /> */}
 
@@ -104,11 +120,11 @@ const Navpc = () => {
           </li>
           <li>
             <Link to="/favorites" className="flex items-center gap-2">
-            <Heart className="w-5 h-5 text-red-500" />
-            Favorites
-          </Link>
+              <Heart className="w-5 h-5 text-red-500" />
+              Favorites
+            </Link>
           </li>
-          
+
           {/* 💰 Cart total visible on mobile */}
           <li className="text-gray-800 font-semibold">
             Cart Total: ${cartTotal}
