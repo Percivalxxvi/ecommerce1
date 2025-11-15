@@ -9,6 +9,7 @@ import Navpc from '../components/Navpc';
 import ProductSearch from "../pages/ProductSearch";
 import BackToTopButton from '../components/BackToTopButton';
 import Favorites from '../components/Favorites';
+import Checkout from '../pages/Checkout';
 
 const App = () => {
   const [cartCount, setCartCount] = useState(0);
@@ -40,6 +41,7 @@ const App = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/search" element={<ProductSearch />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
     </Router>
   );

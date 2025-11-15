@@ -1,10 +1,13 @@
 import React from "react";
 import { Trash2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import useCartStore from "../store"; // ✅ Ensure the path is correct
+import { useState } from "react";
 
 const CartPage = () => {
+  const [info, setinfo] = useState({ name: "", email: "", address: "" });
+  console.log(info);
   const navigate = useNavigate();
   const {
     cart,
@@ -15,6 +18,38 @@ const CartPage = () => {
   } = useCartStore();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handlepayment = () => {
+    //  if (name==="" || email==="" || address===""){
+    //   setEmptyField(true);
+    // }
+    if (window.MonnifySDK) {
+      window.MonnifySDK.initialize({
+        amount: total, // Amount in Naira
+        currency: "NGN",
+        reference: new Date().getTime().toString(), // Unique transaction reference
+        customerName: info.name,
+        customerEmail: info.email,
+        apiKey: "MK_TEST_SV8THETAPX", // Replace with your actual public key
+        paymentDescription: "Payment for school fees", // 👈 REQUIRED
+        contractCode: "8205348210",
+        metadata: {
+          product: "Product Fees",
+        },
+        onComplete: function (response) {
+          // Handle successful payment completion
+          console.log("Payment successful:", response);
+          alert("Payment successful!");
+        },
+        onClose: function () {
+          // Handle payment modal close
+          console.log("Payment modal closed.");
+        },
+      });
+    } else {
+      console.error("Monnify SDK not loaded.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 sm:p-6 relative">
@@ -134,7 +169,35 @@ const CartPage = () => {
                 >
                   Clear Cart
                 </button>
-                <button className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition text-sm sm:text-base">
+                <div className="flex flex-col gap-4 w-full max-w-md mx-auto">
+                  <input
+                    onChange={(e) => setinfo({ ...info, name: e.target.value })}
+                    type="text"
+                    placeholder="Name"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                  />
+                  <input
+                    onChange={(e) =>
+                      setinfo({ ...info, email: e.target.value })
+                    }
+                    type="email"
+                    placeholder="Email"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                  />
+                  <textarea
+                    onChange={(e) =>
+                      setinfo({ ...info, address: e.target.value })
+                    }
+                    type="text"
+                    placeholder="Address"
+                    className="w-full h-20 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 placeholder-gray-400"
+                  />
+                </div>
+
+                <button
+                  onClick={handlepayment}
+                  className="bg-green-600 text-center text-white px-6 py-2 rounded-lg hover:bg-green-700 transition text-sm sm:text-base cursor-pointer"
+                >
                   Proceed to Checkout
                 </button>
               </div>
