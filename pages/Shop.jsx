@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import Navbar from "../components/Navbar";
-import Apicomp1 from "../components/Apicomp1";
+import Apicomp01 from "../components/Apicomp01";
 import { useData } from "../store";
 import { useParams } from "react-router-dom";
 
@@ -55,7 +55,7 @@ const Shop = () => {
     <div>
       <Navbar page="shop" />
 
-      <div className="p-4">
+      <div className="p-4 lg:bg-[#f5f5f5]">
         <h1 className="text-2xl font-semibold mb-4">
           {normalizedCategory
             ? `${normalizedCategory.toUpperCase()} COLLECTION`
@@ -65,10 +65,10 @@ const Shop = () => {
 
       {/* 🛍️ Product Grid */}
       <div className="h-fit lg:bg-[#f5f5f5] flex items-center justify-center">
-        <div className="flex lg:gap-5 gap-1 flex-wrap items-center justify-center">
+        <div className="flex lg:gap-5 gap-0.5 md:gap-2.5 flex-wrap items-center justify-center">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((item, index) => (
-              <Apicomp1 page="shop" key={index} data={item} />
+              <Apicomp01 page="shop" key={index} data={item} />
             ))
           ) : (
             <p className="text-white text-center py-10 text-lg">

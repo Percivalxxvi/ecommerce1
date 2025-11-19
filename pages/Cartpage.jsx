@@ -25,7 +25,7 @@ const CartPage = () => {
     // }
     if (window.MonnifySDK) {
       window.MonnifySDK.initialize({
-        amount: total, // Amount in Naira
+        amount: total*1400, // Amount in Naira
         currency: "NGN",
         reference: new Date().getTime().toString(), // Unique transaction reference
         customerName: info.name,
@@ -109,7 +109,7 @@ const CartPage = () => {
                 <div className="flex justify-center sm:justify-start items-center gap-3 mt-3 sm:mt-0">
                   <button
                     onClick={() => decreaseQuantity(item.id)}
-                    className="bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 text-lg font-semibold"
+                    className="bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 text-lg font-semibold hover:cursor-pointer"
                   >
                     −
                   </button>
@@ -118,7 +118,7 @@ const CartPage = () => {
                   </span>
                   <button
                     onClick={() => increaseQuantity(item.id)}
-                    className="bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 text-lg font-semibold"
+                    className="bg-gray-200 px-3 py-1 rounded-md hover:bg-gray-300 text-lg font-semibold hover:cursor-pointer"
                   >
                     +
                   </button>
